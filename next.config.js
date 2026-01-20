@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  serverComponentsExternalPackages: ['@napi-rs/canvas'],
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('@napi-rs/canvas');
+    }
+    return config;
+  },
 }
 
 module.exports = nextConfig
