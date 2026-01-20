@@ -1,19 +1,8 @@
-import { createCanvas, registerFont, loadImage } from 'canvas';
-import path from 'path';
+import { createCanvas } from '@napi-rs/canvas';
 import { Theme } from './theme';
 
-const FONTS_DIR = path.join(process.cwd(), 'fonts');
 const WIDTH = 3600; // 12 inches at 300 DPI
 const HEIGHT = 4800; // 16 inches at 300 DPI
-
-// Register fonts
-try {
-    registerFont(path.join(FONTS_DIR, 'Roboto-Bold.ttf'), { family: 'Roboto', weight: 'bold' });
-    registerFont(path.join(FONTS_DIR, 'Roboto-Regular.ttf'), { family: 'Roboto', weight: 'normal' });
-    registerFont(path.join(FONTS_DIR, 'Roboto-Light.ttf'), { family: 'Roboto', weight: '300' });
-} catch (e) {
-    console.warn('Fonts not found, using system fonts');
-}
 
 interface RoadWay {
     type: 'way';
