@@ -4,6 +4,9 @@ import { fetchOSMData } from '@/lib/overpass';
 import { loadTheme } from '@/lib/theme';
 import { renderPoster } from '@/lib/renderer';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const city = searchParams.get('city');
@@ -42,7 +45,10 @@ export async function GET(request: NextRequest) {
 
         // Fetch OSM data
         const { roads, water, parks, bounds } = await fetchOSMData(coords[0], coords[1], distance);
-
+        console.log(roads, "--------------------------------my roads--------------------------------");
+        console.log(water, "--------------------------------my water--------------------------------");
+        console.log(parks, "--------------------------------my parks--------------------------------");
+        console.log(bounds, "--------------------------------my bounds--------------------------------");
         // Render poster
         const imageBuffer = renderPoster(displayCity, displayCountry, coords, roads as any, water as any, parks as any, bounds, theme);
 
